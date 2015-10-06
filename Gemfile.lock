@@ -46,6 +46,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  bundler
   pg
   sinatra
   sinatra-activerecord
