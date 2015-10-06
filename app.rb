@@ -1,5 +1,5 @@
-require 'sinatra'
 require 'rubygems'
+require 'sinatra'
 require 'twilio-ruby'
 require "sinatra/activerecord"
 
