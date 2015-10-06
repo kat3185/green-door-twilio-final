@@ -1,6 +1,6 @@
+require 'sinatra'
 require 'rubygems'
 require 'twilio-ruby'
-require 'sinatra'
 require "sinatra/activerecord"
 
 class Game < ActiveRecord::Base
