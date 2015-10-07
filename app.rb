@@ -1,9 +1,7 @@
-require 'rubygems'
-require 'sinatra'
-require 'twilio-ruby'
+require "sinatra"
+require "twilio-ruby"
 require "sinatra/activerecord"
-require "./environments"
-require "pg"
+require "./config/environments"
 
 class Game < ActiveRecord::Base
   #model
