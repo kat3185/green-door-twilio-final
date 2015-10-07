@@ -3,6 +3,7 @@ require 'sinatra'
 require 'twilio-ruby'
 require "sinatra/activerecord"
 require "./environments"
+require "pg"
 
 class Game < ActiveRecord::Base
   #model
