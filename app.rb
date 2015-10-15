@@ -4,9 +4,7 @@ require "sinatra/activerecord"
 require "./config/environments"
 
 class Game < ActiveRecord::Base
-  after do
-    ActiveRecord::Base.connection.close
-  end
+  #model
 end
 
 def find_game(text)
