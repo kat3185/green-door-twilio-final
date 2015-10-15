@@ -9,4 +9,8 @@ configure :production do
    :database => db.path[1..-1],
    :encoding => 'utf8'
  )
+
+  after do
+    ActiveRecord::Base.connection.close
+  end
 end

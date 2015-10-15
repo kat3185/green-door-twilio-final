@@ -3,10 +3,6 @@ require "twilio-ruby"
 require "sinatra/activerecord"
 require "./config/environments"
 
-class Application < Sinatra::Base
-  use ActiveRecord::ConnectionAdapters::ConnectionManagement
-end
-
 class Game < ActiveRecord::Base
   #model
 end
