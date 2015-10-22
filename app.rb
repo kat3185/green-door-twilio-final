@@ -2,41 +2,54 @@ require "sinatra"
 require "twilio-ruby"
 require "sinatra/activerecord"
 require "./config/environments"
+require "pry"
 
 class Game < ActiveRecord::Base
   #model
 end
 
-def find_game(text)
-  game_list = Array.new
-  Game.all.each do |game|
-    if game.short_title.downcase.include?(text.downcase)
-      game_list << game
+class Text
+
+  def initialize(body)
+    @body = body
+  end
+
+  def find_games
+    @games = Array.new
+    Game.all.each do |game|
+      if game.short_title.downcase.include?(@body.downcase)
+        @games << game
+      end
     end
   end
-  game_list
+
+  def create_response
+    if @games.length == 1
+      "Visit #{@games.first.url} to play #{@games.first.title}.  Enjoy!"
+    elsif @games.length == 2
+      "If you are looking for #{@games.first.title}, visit #{@games.first.url}, if you meant #{@games.second.title}, visit #{@games.second.url}"
+    elsif @games.empty?
+        "I'm sorry, I don't know that game!"
+    else
+      "I know several games that have #{@body} in them.  Could you be more specific?"
+    end
+  end
+
+  def respond
+    find_games
+    create_response
+  end
+
 end
 
-def create_response(games, text)
-  if games.empty?
-    "I'm sorry, I don't know that game!"
-  elsif games.length == 1
-    "Visit #{games.first.url} to play #{games.first.title}.  Enjoy!"
-  elsif games.length == 2
-    "If you are looking for #{games.first.title}, visit #{games.first.url}, if you meant #{games.second.title}, visit #{games.second.url}"
-  else
-    "I know several games that have #{text} in them.  Could you be more specific?"
-  end
-end
+binding.pry
 
 get "/sms-green-door" do
 
-  body = params[:Body]
-
-  games = find_game(body)
+  recieved_text = Text.new(params[:Body])
 
   twiml = Twilio::TwiML::Response.new do |r|
-    r.Message create_response(games, body)
+    r.Message recieved_text.respond
   end
 
   twiml.text
