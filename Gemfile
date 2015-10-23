@@ -7,3 +7,7 @@ gem "pg"
 gem "activerecord"
 gem "sinatra-activerecord"
 gem "twilio-ruby"
+group :test, :development do
+  gem "rspec"
+  gem "database_cleaner"
+end

@@ -2,20 +2,19 @@ require "sinatra"
 require "twilio-ruby"
 require "sinatra/activerecord"
 require "./config/environments"
-require "pry"
 
 class Game < ActiveRecord::Base
   #model
 end
 
 class Text
-
+attr_reader :games
   def initialize(body)
     @body = body
+    @games = Array.new
   end
 
   def find_games
-    @games = Array.new
     Game.all.each do |game|
       if game.short_title.downcase.include?(@body.downcase)
         @games << game
@@ -23,7 +22,7 @@ class Text
     end
   end
 
-  def create_response
+  def determine_response
     if @games.length == 1
       "Visit #{@games.first.url} to play #{@games.first.title}.  Enjoy!"
     elsif @games.length == 2
@@ -35,21 +34,19 @@ class Text
     end
   end
 
-  def respond
+  def return_response
     find_games
-    create_response
+    determine_response
   end
 
 end
-
-binding.pry
 
 get "/sms-green-door" do
 
   recieved_text = Text.new(params[:Body])
 
   twiml = Twilio::TwiML::Response.new do |r|
-    r.Message recieved_text.respond
+    r.Message recieved_text.return_response
   end
 
   twiml.text
