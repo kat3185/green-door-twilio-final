@@ -14,3 +14,7 @@ configure :production do
     ActiveRecord::Base.connection.close
   end
 end
+
+configure do
+  set :views, 'app/views'
+end
