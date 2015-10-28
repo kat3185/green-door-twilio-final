@@ -13,10 +13,12 @@ class Text
       "Visit #{games.first.url} to play #{games.first.title}.  Enjoy!"
     elsif games.length == 2
       "If you are looking for #{games.first.title}, visit #{games.first.url}, if you meant #{games.second.title}, visit #{games.second.url}"
-    elsif games.empty?
-        "I'm sorry, I don't know that game!"
-    else
+    elsif games.length > 2
       "I know several games that have #{body} in them.  Could you be more specific?"
+    elsif games.empty?
+      "I'm sorry, I don't know that game!"
+    else
+      "This robot is temporarily broken!  Sorry :("
     end
   end
 
