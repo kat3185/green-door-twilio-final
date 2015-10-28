@@ -18,25 +18,25 @@ let(:text) { Text.new("Lindy Hop") }
     end
 
     it "assigns relevant games to the text (one game)" do
-      Game.create(title: "a", url: "b", short_title: "Lindy Hop")
+      Game.create(title: "a", url: "b", short_title: "lindy hop")
       text.find_games
       expect(text.games.length).to eq(1)
     end
 
     it "assigns relevant games to the text (two games)" do
-      Game.create(title: "ab", url: "bb", short_title: "Lindy Hop 2")
+      Game.create(title: "ab", url: "bb", short_title: "lindy hop 2")
       text.find_games
       expect(text.games.length).to eq(2)
     end
 
     it "assigns relevant games to the text (two games out of three)" do
-      Game.create(title: "aba", url: "bba", short_title: "Not Relevant")
+      Game.create(title: "aba", url: "bba", short_title: "not relevant")
       text.find_games
       expect(text.games.length).to eq(2)
     end
 
     it "assigns relevant games to the text (three games out of four)" do
-      Game.create(title: "abaa", url: "bbaa", short_title: "Lindy Hop 21")
+      Game.create(title: "abaa", url: "bbaa", short_title: "lindy hop 21")
       text.find_games
       expect(text.games.length).to eq(3)
     end
@@ -64,7 +64,7 @@ let(:text) { Text.new("Lindy Hop") }
     it "returns the correct response finding three games" do
       three_games = Text.new("Lindy Hop")
       three_games.find_games
-      expect(three_games.determine_response).to eq("I know several games that have Lindy Hop in them.  Could you be more specific?")
+      expect(three_games.determine_response).to eq("I know several games that have lindy hop in them.  Could you be more specific?")
     end
   end
 end

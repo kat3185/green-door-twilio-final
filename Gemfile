@@ -10,4 +10,5 @@ gem "twilio-ruby"
 group :test, :development do
   gem "rspec"
   gem "database_cleaner"
+  gem "pry"
 end

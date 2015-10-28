@@ -4,22 +4,16 @@ require "sinatra/activerecord"
 require "./config/environments"
 
 class Game < ActiveRecord::Base
-  #model
 end
 
 class Text
-attr_reader :games
+  attr_reader :games
   def initialize(body)
-    @body = body
-    @games = Array.new
+    @body = body.downcase
   end
 
   def find_games
-    Game.all.each do |game|
-      if game.short_title.downcase.include?(@body.downcase)
-        @games << game
-      end
-    end
+    @games = Game.where("LOWER(short_title) LIKE ?", "%#{@body}%").to_a
   end
 
   def determine_response
@@ -38,7 +32,6 @@ attr_reader :games
     find_games
     determine_response
   end
-
 end
 
 get "/sms-green-door" do
