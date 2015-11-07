@@ -1,29 +1,26 @@
 class Text
-  attr_reader :body, :games
+  #TODO: rename message?
+  attr_reader :body
   def initialize(body)
     @body = body.downcase
   end
 
-  def find_games
-    @games = Game.where("LOWER(short_title) LIKE ?", "%#{body}%").to_a
+  def games
+    @games ||= Game.short_title_like(body).to_a
   end
 
   def determine_response
-    if games.length == 1
-      "Visit #{games.first.url} to play #{games.first.title}.  Enjoy!"
-    elsif games.length == 2
-      "If you are looking for #{games.first.title}, visit #{games.first.url}, if you meant #{games.second.title}, visit #{games.second.url}"
-    elsif games.length > 2
-      "I know several games that have #{body} in them.  Could you be more specific?"
-    elsif games.empty?
+    case games.length
+    when 0
       "I'm sorry, I don't know that game!"
+    when 1
+      "Visit #{games.first.url} to play #{games.first.title}.  Enjoy!"
+    when 2
+      "If you are looking for #{games.first.title}, visit #{games.first.url}, if you meant #{games.second.title}, visit #{games.second.url}"
     else
-      "This robot is temporarily broken!  Sorry :("
+      "I know several games that have #{body} in them.  Could you be more specific?"
     end
-  end
-
-  def return_response
-    find_games
-    determine_response
+  rescue
+    "This robot is temporarily broken!  Sorry :("
   end
 end

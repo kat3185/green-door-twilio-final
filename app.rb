@@ -9,7 +9,7 @@ get "/sms-green-door" do
   recieved_text = Text.new(params[:Body])
 
   twiml = Twilio::TwiML::Response.new do |r|
-    r.Message recieved_text.return_response
+    r.Message recieved_text.determine_response
   end
 
   twiml.text
@@ -39,8 +39,9 @@ post "/games" do
   end
 end
 
-post "/DestroyGame" do
-  game_to_delete = Game.find(params[:game_id])
+delete "/games/:id" do
+  game_to_delete = Game.find(params[:id])
   game_to_delete.destroy
+  # Rails.logger.warn "Deleting game ---#{game_to_delete.inspect}---"
   redirect "/games"
 end
