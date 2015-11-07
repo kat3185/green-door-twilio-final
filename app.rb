@@ -39,6 +39,8 @@ post "/games" do
   end
 end
 
+#put for edit
+
 delete "/games/:id" do
   game_to_delete = Game.find(params[:id])
   game_to_delete.destroy
