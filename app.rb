@@ -6,10 +6,10 @@ require "./config/environments"
 Dir['app/**/*.rb'].each { |file| require_relative file }
 
 get "/sms-green-door" do
-  recieved_text = Text.new(params[:Body])
+  recieved_sms = Sms.new(params[:Body])
 
   twiml = Twilio::TwiML::Response.new do |r|
-    r.Message recieved_text.return_response
+    r.Message recieved_sms.determine_response
   end
 
   twiml.text
@@ -39,8 +39,11 @@ post "/games" do
   end
 end
 
-post "/DestroyGame" do
-  game_to_delete = Game.find(params[:game_id])
+#put for edit
+
+delete "/games/:id" do
+  game_to_delete = Game.find(params[:id])
   game_to_delete.destroy
+  # Rails.logger.warn "Deleting game ---#{game_to_delete.inspect}---"
   redirect "/games"
 end
