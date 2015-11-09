@@ -1,4 +1,4 @@
-class Text
+class Sms
   #TODO: rename message?
   attr_reader :body
   def initialize(body)

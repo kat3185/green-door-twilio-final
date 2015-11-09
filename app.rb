@@ -6,10 +6,10 @@ require "./config/environments"
 Dir['app/**/*.rb'].each { |file| require_relative file }
 
 get "/sms-green-door" do
-  recieved_text = Text.new(params[:Body])
+  recieved_sms = Sms.new(params[:Body])
 
   twiml = Twilio::TwiML::Response.new do |r|
-    r.Message recieved_text.determine_response
+    r.Message recieved_sms.determine_response
   end
 
   twiml.text

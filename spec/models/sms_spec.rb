@@ -1,12 +1,12 @@
 require 'spec_helper'
 require_relative '../../app'
 
-describe Text do
-let(:text) { Text.new("Lindy Hop") }
+describe Sms do
+let(:sms) { Sms.new("Lindy Hop") }
 
   describe "#new" do
-    it "is a text" do
-      expect(text).to be_a(Text)
+    it "is a Sms" do
+      expect(sms).to be_a(Sms)
     end
   end
 
@@ -19,22 +19,22 @@ let(:text) { Text.new("Lindy Hop") }
     end
 
     it "returns the correct response finding one game" do
-      single_game = Text.new("Lindy Hop 21")
+      single_game = Sms.new("Lindy Hop 21")
       expect(single_game.determine_response).to eq("Visit bbaa to play abaa.  Enjoy!")
     end
 
     it "returns the correct response finding two games" do
-      two_games = Text.new("Lindy Hop 2")
+      two_games = Sms.new("Lindy Hop 2")
       expect(two_games.determine_response).to eq("If you are looking for ab, visit bb, if you meant abaa, visit bbaa")
     end
 
     it "returns the correct response finding no games" do
-      no_games = Text.new("Lindy Hop 4444")
+      no_games = Sms.new("Lindy Hop 4444")
       expect(no_games.determine_response).to eq("I'm sorry, I don't know that game!")
     end
 
     it "returns the correct response finding three games" do
-      three_games = Text.new("Lindy Hop")
+      three_games = Sms.new("Lindy Hop")
       expect(three_games.determine_response).to eq("I know several games that have lindy hop in them.  Could you be more specific?")
     end
   end
