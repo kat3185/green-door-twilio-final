@@ -20,16 +20,14 @@ get "/" do
 end
 
 get "/games" do
-  game_list = Game.all
-  erb :index, locals: {game_list: game_list}
+  erb :index, locals: {game_list: Game.all}
 end
 
-get "/games/:id" do
-  game = Game.find(params[:id])
-  erb :edit, locals: {game: game}
+get "/games/:id/edit" do
+  erb :edit, locals: {game: Game.find(params[:id])}
 end
 
-post "/games" do
+post "/game" do
   my_game = Game.new(params[:game])
 
   if my_game.save
@@ -39,7 +37,12 @@ post "/games" do
   end
 end
 
-#put for edit
+put "/game/:id" do
+  game_to_update = Game.find(params[:game][:id])
+  game_to_update.update(params[:game])
+  game_to_update.save
+  redirect "/games"
+end
 
 delete "/games/:id" do
   game_to_delete = Game.find(params[:id])
