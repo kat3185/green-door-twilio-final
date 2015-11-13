@@ -2,7 +2,7 @@
 <% if false%> <%= erb :form, locals: {game: game, edit: true, action: "game/:id"}, layout: false %><%end%>
 
 <div class="medium-6 columns">
-  <form action="/game/:id" method="post">
+  <form action="/game/<%= game.id %>" method="post">
     <input name="_method" value="put" type="hidden"/>
     <input name="game[id]" value="<%= game.id %>" type="hidden"/>
     <div>
