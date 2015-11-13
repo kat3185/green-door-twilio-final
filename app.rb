@@ -4,7 +4,6 @@ require "sinatra/activerecord"
 require "./config/environments"
 require "will_paginate"
 require 'will_paginate/active_record'
-require "pry"
 
 Dir['app/**/*.rb'].each { |file| require_relative file }
 
@@ -26,8 +25,8 @@ get "/games" do
   erb :index, locals: {games: Game.paginate(:page => params[:page])}
 end
 
-get "/games/:id/edit" do
-  erb :edit, locals: {game: Game.find(params[:id])}
+get "/games/:id/edit" do |id|
+  erb :edit, locals: {game: Game.find(id)}
 end
 
 post "/game" do

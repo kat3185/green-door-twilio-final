@@ -1,4 +1,4 @@
 class Game < ActiveRecord::Base
   scope :short_title_like, ->(name) {where "LOWER(short_title) LIKE ?", "%#{name}%"}
-  self.per_page = 3
+  self.per_page = 10
 end
