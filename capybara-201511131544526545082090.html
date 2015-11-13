@@ -1,0 +1,64 @@
+<html>
+<head>
+  <title>Green Door Labs Twilio</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/foundation.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1> Games </h1>
+
+<table>
+  <tr>
+    <th>Game Number</th>
+    <th>Game Title</th>
+    <th>Short Title</th>
+    <th>Game URL</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Construct Additional Pylons</td>
+    <td>CAP</td>
+    <td>http://www.starcraft.com</td>
+    <td><a href="/games/1/edit">Edit</a></td>
+    <td><form action="/game/1" method="post">
+      <input name="_method" type="hidden" value="delete" />
+      <input type="submit" class="button radius tiny" value="Delete">
+    </form></td>
+  </tr>
+</table>
+
+<h3>Add a Game</h3>
+<div class="medium-6 columns">
+  <form action="/game" method="post">
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="game[title]" value="">
+    </div>
+
+    <div>
+      <label for="short_title">Short Title:</label>
+      <input type="text" id="short_title" name="game[short_title]" value="">
+    </div>
+
+    <div>
+      <label for="url">URL:</label>
+      <input type="text" id="url" name="game[url]" value="">
+    </div>
+
+    <input type="submit" class="button radius tiny" value="Submit Game">
+  </form>
+</div>
+
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

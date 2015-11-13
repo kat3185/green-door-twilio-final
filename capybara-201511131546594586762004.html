@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>Green Door Labs Twilio</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/foundation.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h3>Edit This Game</h3>
+
+
+<div class="medium-6 columns">
+  <form action="/game/1" method="post">
+    <input name="_method" value="put" type="hidden"/>
+    <input name="game[id]" value="1" type="hidden"/>
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="game[title]" value="Construct Additional Pylons">
+    </div>
+
+    <div>
+      <label for="short_title">Short Title:</label>
+      <input type="text" id="short_title" name="game[short_title]" value="CAP">
+    </div>
+
+    <div>
+      <label for="url">URL:</label>
+      <input type="text" id="url" name="game[url]" value="http://www.starcraft.com">
+    </div>
+
+    <input type="submit" class="button radius tiny" value="Submit Game">
+  </form>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,6 +1,4 @@
 require 'spec_helper'
-require_relative '../../app'
-require 'pry'
 
 describe Game do
   describe "#new" do
