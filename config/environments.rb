@@ -10,11 +10,12 @@ configure :production do
    :encoding => 'utf8'
  )
 
-  after do
-    ActiveRecord::Base.connection.close
-  end
 end
 
 configure do
   set :views, 'app/views'
+
+  after do
+    ActiveRecord::Base.connection.close
+  end
 end

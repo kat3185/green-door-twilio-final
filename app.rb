@@ -2,6 +2,9 @@ require "sinatra"
 require "twilio-ruby"
 require "sinatra/activerecord"
 require "./config/environments"
+require "will_paginate"
+require 'will_paginate/active_record'
+require "pry"
 
 Dir['app/**/*.rb'].each { |file| require_relative file }
 
@@ -20,7 +23,7 @@ get "/" do
 end
 
 get "/games" do
-  erb :index, locals: {game_list: Game.all}
+  erb :index, locals: {games: Game.paginate(:page => params[:page])}
 end
 
 get "/games/:id/edit" do
@@ -37,15 +40,15 @@ post "/game" do
   end
 end
 
-put "/game/:id" do
-  game_to_update = Game.find(params[:game][:id])
+put "/game/:id" do |id|
+  game_to_update = Game.find(id)
   game_to_update.update(params[:game])
   game_to_update.save
   redirect "/games"
 end
 
-delete "/games/:id" do
-  game_to_delete = Game.find(params[:id])
+delete "/game/:id" do |id|
+  game_to_delete = Game.find(id)
   game_to_delete.destroy
   # Rails.logger.warn "Deleting game ---#{game_to_delete.inspect}---"
   redirect "/games"

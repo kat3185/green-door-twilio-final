@@ -1,5 +1,5 @@
 <h1> Games </h1>
-
+<%= will_paginate games %>
 <table>
   <tr>
     <th>Game Number</th>
@@ -7,15 +7,15 @@
     <th>Short Title</th>
     <th>Game URL</th>
   </tr>
-  <% game_list.each do |game| %>
+  <% games.each do |game| %>
   <tr>
     <td><%=game.id%></td>
     <td><%=game.title%></td>
     <td><%=game.short_title%></td>
     <td><%=game.url%></td>
     <td><a href="/games/<%=game.id%>/edit">Edit</a></td>
-    <td><form action="/DestroyGame" method="post">
-      <input type="hidden" name="game_id" value="<%= game.id%>">
+    <td><form action="/game/<%=game.id%>" method="post">
+      <input name="_method" type="hidden" value="delete" />
       <input type="submit" class="button radius tiny" value="Delete">
     </form></td>
   </tr>
