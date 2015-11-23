@@ -31,12 +31,8 @@ end
 
 post "/game" do
   my_game = Game.new(params[:game])
-
-  if my_game.save
-    redirect "/games"
-  else
-    erb :index, locals: { games: Game.paginate(:page => params[:page])}
-  end
+  my_game.save
+  redirect "/games"
 end
 
 put "/game/:id" do |id|

@@ -1,9 +1,5 @@
 <div class="medium-6 columns">
   <form action="/game" method="post">
-    <% if edit == true %>
-    <input name="_method" value="put" type="hidden"/>
-    <input name="game[id]" value="<%= game.id %>" type="hidden"/>
-    <%end%>
     <div>
       <label for="title">Title:</label>
       <input type="text" id="title" name="game[title]" value="<%= game.title %>">
