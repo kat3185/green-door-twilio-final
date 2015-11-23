@@ -1,5 +1,4 @@
 <h3>Edit This Game</h3>
-<% if false%> <%= erb :form, locals: {game: game, edit: true, action: "game/:id"}, layout: false %><%end%>
 
 <div class="medium-6 columns">
   <form action="/game/<%= game.id %>" method="post">

@@ -49,6 +49,5 @@ end
 delete "/game/:id" do |id|
   game_to_delete = Game.find(id)
   game_to_delete.destroy
-  # Rails.logger.warn "Deleting game ---#{game_to_delete.inspect}---"
   redirect "/games"
 end
